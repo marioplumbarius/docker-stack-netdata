@@ -1,0 +1,2 @@
+# docker-netdata
+Dockerized netdata.
