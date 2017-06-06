@@ -1,0 +1,32 @@
+version: "3"
+services:
+  netdata:
+    image: firehol/netdata:latest
+    volumes:
+      - usr_libexec_netdata_plugins_d:/usr/libexec/netdata/plugins.d
+      - ./etc/netdata/netdata.conf:/etc/netdata/netdata.conf
+      - ./etc/netdata/stream.conf:/etc/netdata/stream.conf
+      - /:/host
+    ports:
+      - 19999:19999
+    networks:
+      - netdata
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 5s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 1
+    labels:
+      service: netdata
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "2"
+volumes:
+  usr_libexec_netdata_plugins_d:
+networks:
+  netdata:
