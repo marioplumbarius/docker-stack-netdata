@@ -1,5 +1,5 @@
-# docker-netdata
-Dockerized netdata.
+# docker-stack-netdata
+Docker stack for netdata.
 
 **pre-requisites**
 - docker (17.03.1-ce)
